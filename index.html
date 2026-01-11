@@ -205,7 +205,7 @@ const today = new Date().toDateString();
 
 let data = JSON.parse(localStorage.getItem("nabung")) || {
   total:0,
-  daily:2000,
+  daily:10000,
   lastDate:"",
   reminder:true
 };
@@ -260,7 +260,7 @@ remindBtn.onclick = async ()=>{
   }
   const perm = await Notification.requestPermission();
   if(perm === "granted"){
-    alert("🔔 Pengingat aktif (jam 20:00)");
+    alert("🔔 Pengingat aktif (jam 07:40)");
     data.reminder = true;
     localStorage.setItem("nabung",JSON.stringify(data));
   }
@@ -269,7 +269,7 @@ remindBtn.onclick = async ()=>{
 setInterval(()=>{
   if(!data.reminder || Notification.permission !== "granted") return;
   const now = new Date();
-  if(now.getHours() === 20 && now.getMinutes() === 0 && data.lastDate !== today){
+  if(now.getHours() === 7 && now.getMinutes() === 40 && data.lastDate !== today){
     new Notification("💰 Waktunya Nabung!",{
       body: `Jangan lupa nabung Rp${data.daily.toLocaleString()} hari ini`
     });
